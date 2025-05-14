@@ -40,7 +40,6 @@
             padding: 0 20px;
         }
         
-        /* Header */
         header {
             background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
@@ -86,7 +85,6 @@
             60% {transform: translateY(-10px) translateX(-50%);}
         }
         
-        /* About Section */
         .about {
             padding: 100px 0;
             background-color: #f9f9f9;
@@ -105,7 +103,6 @@
             font-size: 1.1rem;
         }
         
-        /* Timeline */
         .timeline {
             padding: 100px 0;
             background-color: var(--secondary-color);
@@ -144,7 +141,40 @@
             color: var(--accent-color);
         }
         
-        /* Gallery */
+        .location {
+            margin-top: 15px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .location a {
+            color: var(--accent-color);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--accent-color);
+            transition: all 0.3s ease;
+        }
+        
+        .location a:hover {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+        
+        .map-button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .map-button:hover {
+            background-color: var(--primary-color);
+        }
+        
         .gallery {
             padding: 100px 0;
             background-color: #f9f9f9;
@@ -176,7 +206,6 @@
             transform: scale(1.1);
         }
         
-        /* RSVP */
         .rsvp {
             padding: 100px 0;
             background-color: var(--primary-color);
@@ -231,7 +260,6 @@
             background-color: #9c774d;
         }
         
-        /* Footer */
         footer {
             background-color: var(--text-color);
             color: var(--light-text);
@@ -240,7 +268,6 @@
             font-size: 0.9rem;
         }
         
-        /* Responsive */
         @media (max-width: 768px) {
             .names {
                 font-size: 3rem;
@@ -287,7 +314,11 @@
                 <div class="timeline-time">15:00</div>
                 <div class="timeline-content">
                     <h3 class="timeline-title">Церемония</h3>
-                    <p>Торжественная регистрация брака в живописном зале "Белая лилия". Начало нашего совместного пути.</p>
+                    <p>Торжественная регистрация брака в прекрасном месте, которое мы выбрали специально для этого важного момента.</p>
+                    <p class="location">
+                        Место: <a href="https://go.2gis.com/LlXDB" target="_blank" rel="noopener noreferrer">Посмотреть на карте</a>
+                    </p>
+                    <a href="https://go.2gis.com/LlXDB" target="_blank" rel="noopener noreferrer" class="map-button">Открыть карту проезда</a>
                 </div>
             </div>
             
@@ -295,7 +326,10 @@
                 <div class="timeline-time">16:30</div>
                 <div class="timeline-content">
                     <h3 class="timeline-title">Фотосессия</h3>
-                    <p>Прогулка по красивейшим местам парка "Зеленые холмы" с нашим фотографом. Присоединяйтесь к нам или наслаждайтесь фуршетом.</p>
+                    <p>Прогулка по живописным окрестностям с нашим фотографом, чтобы запечатлеть самые важные моменты этого дня.</p>
+                    <p class="location">
+                        Место: <a href="https://go.2gis.com/LlXDB" target="_blank" rel="noopener noreferrer">Посмотреть на карте</a>
+                    </p>
                 </div>
             </div>
             
@@ -303,7 +337,11 @@
                 <div class="timeline-time">18:00</div>
                 <div class="timeline-content">
                     <h3 class="timeline-title">Банкет</h3>
-                    <p>Праздничный ужин в ресторане "Лаванда". Вкусные блюда, теплые тосты и танцы до утра!</p>
+                    <p>Праздничный ужин в уютной атмосфере. Вкусные блюда, теплые тосты и танцы до утра!</p>
+                    <p class="location">
+                        Место: <a href="https://go.2gis.com/LlXDB" target="_blank" rel="noopener noreferrer">Посмотреть на карте</a>
+                    </p>
+                    <a href="https://go.2gis.com/LlXDB" target="_blank" rel="noopener noreferrer" class="map-button">Открыть карту проезда</a>
                 </div>
             </div>
         </div>
@@ -379,7 +417,6 @@
     </footer>
     
     <script>
-        // Smooth scrolling
         document.querySelector('.scroll-down').addEventListener('click', function(e) {
             e.preventDefault();
             window.scrollBy({
@@ -388,7 +425,6 @@
             });
         });
         
-        // Form submission
         document.getElementById('weddingForm').addEventListener('submit', function(e) {
             e.preventDefault();
             alert('Спасибо за ваш ответ! Мы рады, что вы сможете разделить с нами этот день.');
