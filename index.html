@@ -1144,19 +1144,16 @@
                 saveFormData();
             });
             
-            // Отправка формы
             form.addEventListener('submit', async function(e) {
   e.preventDefault();
   
   if (!validateForm()) return;
   
-  // Показать лоадер
   btnText.textContent = 'Отправка...';
   loader.classList.remove('hidden');
   submitBtn.disabled = true;
   
   try {
-    // Собираем данные
     const formData = {
       name: form.name.value,
       contact: form.contact.value,
@@ -1167,15 +1164,20 @@
       transport: document.getElementById('need-transport')?.checked || false
     };
     
-    // Отправка в Google Таблицы
     const response = await fetch('https://script.google.com/macros/s/AKfycbwjZvj8y3_2H8G8tIvXiZ4cuPUpihjvqkKReE0cpA3UYub5TQlCfar2QbK8QRu22LR1AQ/exec', {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(formData)
     });
     
-    if (!response.ok) throw new Error('Ошибка сервера');
+    const result = await response.json();
     
-    // Показать модальное окно успеха
+    if (!result.success) {
+      throw new Error(result.error || 'Неизвестная ошибка сервера');
+    }
+    
     successModal.classList.add('show');
     document.body.style.overflow = 'hidden';
     localStorage.removeItem('weddingFormData');
@@ -1183,7 +1185,7 @@
     
   } catch (error) {
     console.error('Ошибка:', error);
-    alert('Произошла ошибка при отправке. Пожалуйста, попробуйте позже.');
+    alert(error.message || 'Произошла ошибка при отправке. Пожалуйста, попробуйте позже.');
   } finally {
     btnText.textContent = 'Отправить';
     loader.classList.add('hidden');
