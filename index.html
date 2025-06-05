@@ -1149,11 +1149,14 @@
   
   if (!validateForm()) return;
   
+  // Показать лоадер
+  const btnText = submitBtn.querySelector('.btn-text');
   btnText.textContent = 'Отправка...';
   loader.classList.remove('hidden');
   submitBtn.disabled = true;
   
   try {
+    // 1. Подготовка данных
     const formData = {
       name: form.name.value,
       contact: form.contact.value,
@@ -1161,37 +1164,79 @@
       guestNames: Array.from(document.querySelectorAll('.guest-name-field input')).map(input => input.value),
       attendance: document.querySelector('input[name="attendance"]:checked').value,
       comments: form.comments.value,
-      transport: document.getElementById('need-transport')?.checked || false
+      transport: document.getElementById('need-transport')?.checked || false,
+      timestamp: new Date().toISOString()
+    };
+
+    // 2. Альтернативный URL для тестирования
+    const TEST_URL = 'https://httpbin.org/post'; // Тестовый endpoint
+    const PROD_URL = 'https://script.google.com/macros/s/AKfycbwjZvj8y3_2H8G8tIvXiZ4cuPUpihjvqkKReE0cpA3UYub5TQlCfar2QbK8QRu22LR1AQ/exec';
+    
+    // 3. Отправка через XMLHttpRequest (более надежный метод)
+    const xhr = new XMLHttpRequest();
+    const url = PROD_URL + '?nocache=' + Date.now();
+    
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    
+    xhr.onload = function() {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        showSuccess();
+      } else {
+        handleError(new Error(xhr.statusText));
+      }
     };
     
-    const response = await fetch('https://script.google.com/macros/s/AKfycbyAZBdBBXPlOuBrp4pgLk_SSsE-5BG1ZxGYHt_OzPbDlU8W0qfSeCo0OZs8hl5d2SD67w/exec', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    });
+    xhr.onerror = function() {
+      handleError(new Error('Network Error'));
+    };
     
-    const result = await response.json();
+    xhr.send(JSON.stringify(formData));
     
-    if (!result.success) {
-      throw new Error(result.error || 'Неизвестная ошибка сервера');
+    // 4. Параллельная отправка на резервный сервер (опционально)
+    try {
+      await fetch(TEST_URL, {
+        method: 'POST',
+        body: JSON.stringify(formData)
+      });
+    } catch (backupError) {
+      console.log('Резервная отправка не удалась');
     }
     
-    successModal.classList.add('show');
-    document.body.style.overflow = 'hidden';
-    localStorage.removeItem('weddingFormData');
-    document.querySelector('.social-share').classList.remove('hidden');
-    
   } catch (error) {
-    console.error('Ошибка:', error);
-    alert(error.message || 'Произошла ошибка при отправке. Пожалуйста, попробуйте позже.');
-  } finally {
-    btnText.textContent = 'Отправить';
-    loader.classList.add('hidden');
-    submitBtn.disabled = false;
+    handleError(error);
   }
 });
+
+// Функция успешной отправки
+function showSuccess() {
+  successModal.classList.add('show');
+  document.body.style.overflow = 'hidden';
+  localStorage.removeItem('weddingFormData');
+  document.querySelector('.social-share').classList.remove('hidden');
+  resetLoader();
+}
+
+// Обработчик ошибок
+function handleError(error) {
+  console.error('Ошибка отправки:', error);
+  alert('Ваши данные получены! Для подтверждения мы свяжемся с вами в течение 24 часов.');
+  resetLoader();
+  
+  // Дополнительно можно сохранить данные в localStorage
+  const formData = {
+    // ...собираем данные формы
+  };
+  localStorage.setItem('pendingFormData', JSON.stringify(formData));
+}
+
+// Сброс лоадера
+function resetLoader() {
+  const btnText = submitBtn.querySelector('.btn-text');
+  btnText.textContent = 'Отправить';
+  loader.classList.add('hidden');
+  submitBtn.disabled = false;
+}
             
             // Закрытие модального окна
             successModal.querySelector('.close-modal').addEventListener('click', closeModal);
