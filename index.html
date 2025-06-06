@@ -482,28 +482,53 @@
             outline: none;
         }
         
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
+        /* Специальные стили для группы с textarea */
+        .form-group.textarea-group {
             position: relative;
+            margin-bottom: 25px;
         }
         
-        .textarea-placeholder {
+        .form-group.textarea-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-family: 'Kosolapa Script', cursive;
+            font-size: 2.52rem;
+            color: var(--dark);
+        }
+        
+        .form-group.textarea-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Kosolapa Script', cursive;
+            font-size: 2.16rem;
+            background-color: rgba(255,255,255,0.95);
+            transition: all 0.3s;
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .textarea-hint {
             position: absolute;
-            top: 50%;
+            bottom: 15px;
             left: 20px;
-            transform: translateY(-50%);
+            right: 20px;
             color: #999;
-            pointer-events: none;
             font-size: 1.8rem;
             opacity: 0.7;
-            width: calc(100% - 40px);
-            text-align: center;
+            pointer-events: none;
+            transition: all 0.3s;
+            line-height: 1.4;
+            background: rgba(255,255,255,0.7);
+            padding: 5px 10px;
+            border-radius: 4px;
         }
         
-        .form-group textarea:focus + .textarea-placeholder,
-        .form-group textarea:not(:placeholder-shown) + .textarea-placeholder {
-            display: none;
+        textarea:focus + .textarea-hint,
+        textarea:not(:placeholder-shown) + .textarea-hint {
+            opacity: 0;
+            visibility: hidden;
         }
         
         /* Стили для радио кнопок */
@@ -704,8 +729,11 @@
                 font-size: 2.16rem;
             }
             
-            .textarea-placeholder {
+            .textarea-hint {
                 font-size: 1.5rem;
+                bottom: 10px;
+                left: 15px;
+                right: 15px;
             }
         }
     </style>
@@ -841,13 +869,13 @@
             <h2 class="section-title animate-slide">Подтверждение</h2>
             <div class="floral-divider animate-fade delay-1"></div>
             <p style="text-align: center; margin-bottom: 30px; font-size: 2.34rem;">
-                Пожалуйста, заполните форму ниже до 6 июля 2025 года
+                Пожалуйста, ответьте на форму ниже до 6 августа 2025 года
             </p>
             
              <form class="rsvp-form" id="weddingForm">
         <!-- Имя -->
         <div class="form-group">
-            <label for="name">Ваше ФИО*</label>
+            <label for="name">Ваше имя*</label>
             <input type="text" id="name" required>
         </div>
         
@@ -884,13 +912,12 @@
             </div>
         </div>
         
-        <!-- Комментарии -->
-        <div class="form-group" style="position: relative;">
+        <!-- Комментарии с исправленной подсказкой -->
+        <div class="form-group textarea-group">
             <label for="comments">Дополнительные пожелания</label>
             <textarea id="comments" placeholder=" "></textarea>
-            <div class="textarea-placeholder">
-                
-                Здесь вы можете указать ваши пожелания по алкоголю, наличие аллергии и другие важные нюансы.
+            <div class="textarea-hint">
+                Здесь вы можете указать ваши пожелания по алкоголю, наличие аллергии и другие важные нюансы
             </div>
         </div>
         
@@ -898,13 +925,12 @@
     </form>
     
     <div class="organizer-contact animate-slide delay-2">
-        <p>На все вопросы связанные с торжеством, с радостью ответит наш свадебный организатор Александра</p> 
-<p>+7 (913) 209 62 64</p>
+        <p>На все вопросы связанные с торжеством, с радостью ответит наш свадебный организатор</p>
+<p>Александра +7 (913) 209 62 64</p>
     </div>
     
     <div class="signature animate-fade delay-3">
-        С любовью, Юрий и Анастасия 
-                06.09.2025
+        С любовью, Юрий и Анастасия 06.09.2025
     </div>
         </div>
     </section>
