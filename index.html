@@ -1,14 +1,955 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <!-- Все стили и мета-теги остаются без изменений -->
-    <!-- ... -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Юрий & Анастасия | 06.09.2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @font-face {
+            font-family: 'Kosolapa Script';
+            src: url('KosolapaScript-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        :root {
+            --primary: #f8f3ee;
+            --secondary: #9FAD93;
+            --accent: #9FAD93;
+            --text: #5a4a42;
+            --dark: #3a2e28;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Kosolapa Script', cursive;
+            color: var(--text);
+            background-color: var(--primary);
+            overflow-x: hidden;
+            font-size: 2.16rem; /* Увеличен основной размер текста на 80% */
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Kosolapa Script', cursive;
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 5.328rem; /* Уменьшен размер заголовков на 20% (было 6.66rem) */
+        }
+        
+        .names {
+            font-family: 'Kosolapa Script', cursive;
+            color: white !important;
+        }
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade {
+            animation: fadeIn 1.5s ease forwards;
+        }
+        
+        .animate-slide {
+            animation: slideUp 1.2s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.3s; }
+        .delay-2 { animation-delay: 0.6s; }
+        .delay-3 { animation-delay: 0.9s; }
+        
+        /* Header */
+        header {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('photo_2025-05-19_20-28-01.jpg'); /* Добавлено фоновое изображение */
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            z-index: 2;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 3;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+        
+        .names {
+            font-size: 6vw;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            opacity: 0;
+        }
+        
+        .date {
+            font-size: 2vw;
+            letter-spacing: 5px;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            opacity: 0;
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            z-index: 4;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-20px) translateX(-50%); }
+            60% { transform: translateY(-10px) translateX(-50%); }
+        }
+        
+        /* Декоративные элементы */
+        .floral-divider {
+            width: 150px;
+            height: 30px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: 40px auto;
+            opacity: 0;
+        }
+        
+        /* Секции */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 5.328rem; /* Уменьшен размер на 20% (было 6.66rem) */
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            opacity: 0;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background: var(--accent);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* История */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 2.34rem; /* Увеличен размер на 80% */
+            line-height: 1.8;
+            opacity: 0;
+        }
+        
+        /* Фото в истории */
+        .about-photos {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .about-photo {
+            width: 300px;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            opacity: 0;
+        }
+        
+        .about-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-photo:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Место проведения */
+        .location-container {
+            background: white;
+            padding: 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            opacity: 0;
+        }
+        
+        .location-container:before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 1px solid var(--accent);
+            pointer-events: none;
+            opacity: 0.5;
+        }
+        
+        .location-title {
+            font-size: 3.888rem; /* Уменьшен размер на 20% (было 4.86rem) */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .location-address {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.52rem; /* Увеличен размер на 80% */
+        }
+        
+        .map-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-family: 'Kosolapa Script', cursive;
+            font-size: 2.52rem; /* Увеличен размер на 80% */
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .map-button:hover {
+            background: var(--dark);
+            transform: translateY(-3px);
+        }
+        
+        /* Программа дня */
+        .timeline {
+            position: relative;
+            padding: 50px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: var(--accent);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            width: 100%;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            padding-right: calc(50% + 50px);
+            text-align: right;
+        }
+        
+        .timeline-item:nth-child(even) {
+            padding-left: calc(50% + 50px);
+            text-align: left;
+        }
+        
+        .timeline-content {
+            padding: 30px;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -60px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -60px;
+        }
+        
+        .timeline-time {
+            font-size: 3.06rem; /* Увеличен размер на 80% */
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .timeline-title {
+            font-size: 2.88rem; /* Уменьшен размер на 20% (было 3.6rem) */
+            margin-bottom: 15px;
+        }
+        
+        /* Дресс-код */
+        .dress-code {
+            background-color: var(--secondary);
+            text-align: center;
+        }
+        
+        .dress-code-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+        
+        .dress-code-title {
+            font-size: 3.888rem; /* Уменьшен размер на 20% (было 4.86rem) */
+            margin-bottom: 30px;
+        }
+        
+        .dress-code-description {
+            font-size: 2.52rem; /* Увеличен размер на 80% */
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+        
+        .color-palette {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        .color-item {
+            text-align: center;
+        }
+        
+        .color-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            border: 3px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .color-circle:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-name {
+            font-family: 'Kosolapa Script', cursive;
+            font-size: 2.52rem; /* Увеличен размер на 80% */
+        }
+        
+        /* Цвета для дресс-кода */
+        .color-1 { background-color: #f4e2e0; } /* Нежно-розовый */
+        .color-2 { background-color: #f0e0c9; } /* Пудровый */
+        .color-3 { background-color: #FEFCCB; } /* Светло-бежевый (изменен на #FEFCCB) */
+        .color-4 { background-color: #3D723E; } /* Бежевый (изменен на #3D723E) */
+        .color-5 { background-color: #a0a398; } /* Серо-зеленый */
+        .color-6 { background-color: #676a5f; } /* Темный серо-зеленый */
+        
+        /* RSVP - Улучшенная форма */
+        .rsvp-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(156, 124, 91, 0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-family: 'Kosolapa Script', cursive;
+            font-size: 2.52rem; /* Увеличен размер на 80% */
+            color: var(--dark);
+        }
+        
+        .form-group .icon {
+            margin-right: 10px;
+            font-size: 2.34rem; /* Увеличен размер на 80% */
+            color: var(--accent);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Kosolapa Script', cursive;
+            font-size: 2.16rem; /* Увеличен размер на 80% */
+            background-color: rgba(255,255,255,0.95);
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(156, 124, 91, 0.2);
+            outline: none;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        /* Стили для радио и чекбоксов */
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+        }
+        
+        .radio-group label, .transport-group label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-family: 'Kosolapa Script', cursive;
+            font-size: 2.16rem; /* Увеличен размер на 80% */
+        }
+        
+        input[type="radio"], input[type="checkbox"] {
+            opacity: 0;
+            position: absolute;
+        }
+        
+        .radio-custom, .checkbox-custom {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            margin-right: 10px;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .checkbox-custom {
+            border-radius: 4px;
+        }
+        
+        input[type="radio"]:checked + .radio-custom::after,
+        input[type="checkbox"]:checked + .checkbox-custom::after {
+            content: '';
+            position: absolute;
+            display: block;
+        }
+        
+        input[type="radio"]:checked + .radio-custom::after {
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+        }
+        
+        input[type="checkbox"]:checked + .checkbox-custom::after {
+            width: 14px;
+            height: 14px;
+            background: var(--accent);
+            top: 1px;
+            left: 1px;
+        }
+        
+        /* Стили для ошибок */
+        .error-message {
+            color: #e74c3c;
+            font-size: 1.89rem; /* Увеличен размер на 80% */
+            margin-top: 5px;
+            display: block;
+            opacity: 0;
+            height: 0;
+            transition: all 0.3s;
+        }
+        
+        .form-group.error input,
+        .form-group.error select,
+        .form-group.error textarea {
+            border-color: #e74c3c;
+        }
+        
+        .form-group.error .error-message {
+            opacity: 1;
+            height: auto;
+        }
+        
+        /* Кнопка отправки */
+        .submit-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 2.52rem; /* Увеличен размер на 80% */
+            font-family: 'Kosolapa Script', cursive;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px auto 0;
+            width: 100%;
+            max-width: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .submit-btn:hover {
+            background: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(1px);
+        }
+        
+        .loader {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Модальное окно */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            transform: translateY(20px);
+            transition: all 0.3s;
+        }
+        
+        .modal.show .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .close-modal:hover {
+            color: var(--accent);
+        }
+        
+        .modal-close-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-family: 'Kosolapa Script', cursive;
+            transition: all 0.3s;
+        }
+        
+        .modal-close-btn:hover {
+            background: var(--dark);
+        }
+        
+        /* Дополнительные классы */
+        .hidden {
+            display: none !important;
+        }
+        
+        .guests-control {
+            display: flex;
+            gap: 10px;
+        }
+        
+        #custom-guests {
+            flex: 1;
+        }
+        
+        .form-actions {
+            text-align: center;
+        }
+        
+        .social-share {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        .fb { background: #3b5998; }
+        .wa { background: #25D366; }
+        .tg { background: #0088cc; }
+        
+        .progress-bar {
+            height: 4px;
+            background: #f0f0f0;
+            margin-bottom: 30px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: var(--accent);
+            width: 0;
+            transition: width 0.3s;
+        }
+        
+        .form-note {
+            font-size: 1.98rem; /* Увеличен размер на 80% */
+            color: #666;
+            margin-top: -15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .save-note {
+            font-size: 1.8rem; /* Увеличен размер на 80% */
+            color: #999;
+            margin-top: 5px;
+        }
+        
+        /* Контакты организатора */
+        .organizer-contact {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 2.16rem; /* Увеличен размер на 80% */
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .names {
+                font-size: 12vw;
+            }
+            
+            .date {
+                font-size: 5vw;
+            }
+            
+            .section-title {
+                font-size: 3.888rem; /* Уменьшен размер на 20% (было 4.86rem) */
+            }
+            
+            .timeline::before {
+                left: 40px;
+            }
+            
+            .timeline-item,
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                padding: 0 30px 0 80px;
+                text-align: left;
+            }
+            
+            .timeline-content::before {
+                left: -50px !important;
+            }
+            
+            .location-container {
+                padding: 30px;
+            }
+            
+            .about-photo {
+                width: 100%;
+                height: 500px;
+            }
+            
+            .color-circle {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .rsvp-form {
+                padding: 25px;
+            }
+            
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 12px 15px;
+            }
+            
+            .submit-btn {
+                padding: 14px 30px;
+                font-size: 2.34rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Весь ваш HTML до формы RSVP остается без изменений -->
-    <!-- ... -->
-
-    <section class="rsvp">
+    <header>
+        <div class="hero-image"></div>
+        <div class="hero-overlay"></div>
+        <div class="header-content">
+            <h1 class="names animate-slide">Юрий & Анастасия</h1>
+            <p class="date animate-slide delay-1">06.09.2025</p>
+        </div>
+        <div class="scroll-down">↓</div>
+    </header>
+    
+   <section class="about">
+    <div class="container">
+        <h2 class="section-title animate-slide">Дорогие гости!</h2>
+        <div class="floral-divider animate-fade delay-1"></div>
+        
+        <div class="about-content animate-slide delay-1">
+            <p>С большой радостью приглашаем на наш первый семейный праздник – нашу свадьбу! Мы очень хотим, чтобы в этот день с нами рядом были самые близкие люди.</p>
+            <p>6 сентября 2025 года мы хотим официально стать семьей и приглашаем разделить с нами этот особенный день. Ваше присутствие сделает наш праздник еще более теплым и запоминающимся.</p>
+        </div>
+        
+        <div class="about-photos">
+                <div class="about-photo animate-slide delay-2">
+                    <img src="photo2.jpg" alt="Наше фото 1">
+                </div>
+                <div class="about-photo animate-slide delay-3">
+                    <img src="photo3.jpg" alt="Наше фото 2">
+                </div>
+        </div>
+    </div> 
+</section>
+    
+    <section class="location" style="background: var(--secondary);">
+        <div class="container">
+            <h2 class="section-title animate-slide">Место проведения</h2>
+            <div class="floral-divider animate-fade delay-1"></div>
+            <div class="location-container animate-slide delay-2">
+                <h3 class="location-title">BOTANIKA HALL</h3>
+                <p class="location-address">
+                    Зоопарк им. Р.А. Шило<br>
+                    Улица Жуковского, 100/5<br>
+                    3 этаж
+                </p>
+                <div style="text-align: center;">
+                    <a href="https://go.2gis.com/E4ls1" target="_blank" class="map-button">Схема проезда</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="program">
+        <div class="container">
+            <h2 class="section-title animate-slide">Программа дня</h2>
+            <div class="floral-divider animate-fade delay-1"></div>
+            
+            <div class="timeline">
+                <div class="timeline-item animate-slide delay-1">
+                    <div class="timeline-content">
+                        <div class="timeline-time">15:00</div>
+                        <h3 class="timeline-title">Церемония</h3>
+                        <p>Торжественная регистрация брака в банкетном зале BOTANIKA HALL. Начало нашего совместного пути.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item animate-slide delay-2">
+                    <div class="timeline-content">
+                        <div class="timeline-time">16:30</div>
+                        <h3 class="timeline-title">Фотосессия</h3>
+                        <p>что-то.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item animate-slide delay-3">
+                    <div class="timeline-content">
+                        <div class="timeline-time">18:00</div>
+                        <h3 class="timeline-title">Банкет</h3>
+                        <p>что-то еще.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="dress-code">
+        <div class="container">
+            <div class="dress-code-container animate-slide">
+                <h3 class="dress-code-title">Дресс-код</h3>
+                <div class="floral-divider animate-fade delay-1"></div>
+                <p class="dress-code-description">
+                    Для нас главное - ваше присутствие!
+Нам будет очень приятно, если вы поддержите цветовую гамму свадьбы. Но она лишь ориентир.
+                </p>
+                
+                <div class="color-palette">
+                    <div class="color-item animate-slide delay-1">
+                        <div class="color-circle color-1"></div>
+                        <p class="color-name">Нежно-розовый</p>
+                    </div>
+                    <div class="color-item animate-slide delay-2">
+                        <div class="color-circle color-2"></div>
+                        <p class="color-name">Бежевый</p>
+                    </div>
+                    <div class="color-item animate-slide delay-3">
+                        <div class="color-circle color-3"></div>
+                        <p class="color-name">Светло-желтый</p>
+                    </div>
+                    <div class="color-item animate-slide delay-1">
+                        <div class="color-circle color-4"></div>
+                        <p class="color-name">Изумрудный</p>
+                    </div>
+                    <div class="color-item animate-slide delay-2">
+                        <div class="color-circle color-5"></div>
+                        <p class="color-name">Серо-зеленый</p>
+                    </div>
+                    <div class="color-item animate-slide delay-3">
+                        <div class="color-circle color-6"></div>
+                        <p class="color-name">Темный серо-зеленый</p>
+                    </div>
+                </div>
+                <p style="margin-top: 30px; font-style: italic; font-size: 2.34rem;">
+                    Джентельмены, выберите любой костюм, в котором будете чувствовать себя на все сто!
+                </p>
+            </div>
+        </div>
+    </section>
+    
+   <section class="rsvp">
         <div class="container">
             <h2 class="section-title animate-slide">Подтвердите присутствие</h2>
             <div class="floral-divider animate-fade delay-1"></div>
@@ -119,9 +1060,13 @@
             </div>
         </div>
     </section>
-
-    <!-- Весь остальной HTML остается без изменений -->
-    <!-- ... -->
+    
+    <footer class="animate-slide" style="text-align: center;">
+        <div class="container">
+            <p style="font-size: 3.06rem;">С любовью, Юрий и Анастасия</p>
+            <p style="font-size: 2.52rem;">06.09.2025</p>
+        </div>
+    </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
