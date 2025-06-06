@@ -957,467 +957,101 @@
                 Пожалуйста, подтвердите ваше присутствие на нашем празднике до 6 августа 2025 года
             </p>
             
-            <form class="rsvp-form animate-slide delay-2" id="weddingForm">
-                <div class="progress-bar animate-fade delay-1">
-                    <div class="progress"></div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="name">
-                        <i class="fas fa-user icon"></i> Ваше имя*
-                    </label>
-                    <input type="text" id="name" name="name" required aria-required="true">
-                    <span class="error-message" id="name-error"></span>
-                </div>
-                
-                <div class="form-group">
-                    <label for="contact">
-                        <i class="fas fa-envelope icon"></i> Email или телефон*
-                    </label>
-                    <input type="text" id="contact" name="contact" required aria-required="true">
-                    <span class="error-message" id="contact-error"></span>
-                </div>
-                
-                <div class="form-group">
-                    <label for="guests">
-                        <i class="fas fa-users icon"></i> Количество гостей*
-                    </label>
-                    <div class="guests-control">
-                        <select id="guests" name="guests" required aria-required="true">
-                            <option value="" disabled selected>Выберите количество</option>
-                            <option value="1">1 (только я)</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="custom">Другое количество</option>
-                        </select>
-                        <input type="number" id="custom-guests" name="custom-guests" min="1" max="10" class="hidden">
-                    </div>
-                    <div id="guest-names-container" class="hidden">
-                        <!-- Динамически добавляемые поля для имен гостей -->
-                    </div>
-                </div>
-                
-                <div class="form-group attendance-group">
-                    <label>
-                        <i class="fas fa-calendar-check icon"></i> Вы сможете присутствовать?
-                    </label>
-                    <div class="radio-group">
-                        <label>
-                            <input type="radio" name="attendance" value="Да, с радостью!" checked> 
-                            <span class="radio-custom"></span>
-                            Да, с радостью!
-                        </label>
-                        <label>
-                            <input type="radio" name="attendance" value="К сожалению, не смогу"> 
-                            <span class="radio-custom"></span>
-                            К сожалению, не смогу
-                        </label>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="comments">
-                        <i class="fas fa-comment-dots icon"></i> Дополнительные пожелания
-                    </label>
-                    <textarea id="comments" name="comments" rows="6" 
-                              placeholder="Ваши пожелания по алкоголю, наличие аллергии или другие важные комментарии"></textarea>
-                </div>
-                
-                <div class="organizer-contact">
-                    <p>На все вопросы связанные с торжеством, с радостью ответит наш свадебный организатор</p>
-                    <p>Александра +7 (913) 209 62 64</p>
-                </div>
-                
-                <div class="form-note">
-                    <p>* Обязательные для заполнения поля</p>
-                    <p class="save-note">Ваши данные автоматически сохраняются</p>
-                </div>
-                
-                <div class="form-actions">
-                    <button type="submit" class="submit-btn" id="submitBtn">
-                        <span class="btn-text">Отправить</span>
-                        <span class="loader hidden"></span>
-                    </button>
-                    <div class="social-share hidden">
-                        <span>Поделиться событием:</span>
-                        <a href="#" class="social-icon fb" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon wa" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#" class="social-icon tg" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
-                    </div>
-                </div>
-            </form>
-            
-            <!-- Модальное окно успешной отправки -->
-            <div id="successModal" class="modal hidden">
-                <div class="modal-content">
-                    <span class="close-modal">&times;</span>
-                    <div class="modal-icon">🎉</div>
-                    <h3>Спасибо за ваш ответ!</h3>
-                    <p>Мы получили ваше подтверждение и учтем все пожелания.</p>
-                    <button class="modal-close-btn">Закрыть</button>
-                </div>
+             <form class="rsvp-form" id="weddingForm">
+        <!-- Имя -->
+        <div class="form-group">
+            <label for="name">Ваше имя*</label>
+            <input type="text" id="name" required>
+        </div>
+        
+        <!-- Контакты -->
+        <div class="form-group">
+            <label for="contact">Email или телефон*</label>
+            <input type="text" id="contact" required>
+        </div>
+        
+        <!-- Количество гостей (обязательно текст, а не число) -->
+        <div class="form-group">
+            <label for="guests">Количество гостей*</label>
+            <select id="guests" required>
+                <option value="" disabled selected>Выберите</option>
+                <option value="1">1 (только я)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="Более 3">Более 3</option>
+            </select>
+        </div>
+        
+        <!-- Присутствие (точное совпадение с вариантами в форме) -->
+        <div class="form-group">
+            <label>Вы сможете присутствовать?*</label>
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="attendance" value="Да, с радостью!" checked>
+                    Да, с радостью!
+                </label>
+                <label>
+                    <input type="radio" name="attendance" value="К сожалению, не смогу">
+                    К сожалению, не смогу
+                </label>
             </div>
         </div>
-    </section>
-    
-    <footer class="animate-slide" style="text-align: center;">
-        <div class="container">
-            <p style="font-size: 3.06rem;">С любовью, Юрий и Анастасия</p>
-            <p style="font-size: 2.52rem;">06.09.2025</p>
+        
+        <!-- Комментарии -->
+        <div class="form-group">
+            <label for="comments">Комментарии</label>
+            <textarea id="comments"></textarea>
         </div>
-    </footer>
+        
+        <button type="submit">Отправить</button>
+    </form>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
     <script>
-        // Инициализация анимаций при скролле
-        gsap.registerPlugin(ScrollTrigger);
-        
-        // Анимация появления элементов
-        gsap.utils.toArray('.animate-slide, .animate-fade').forEach(el => {
-            gsap.from(el, {
-                scrollTrigger: {
-                    trigger: el,
-                    start: "top 80%",
-                    toggleActions: "play none none none"
-                },
-                opacity: 0,
-                y: 50,
-                duration: 1,
-                delay: el.classList.contains('delay-1') ? 0.3 : 
-                      (el.classList.contains('delay-2') ? 0.6 : 
-                      (el.classList.contains('delay-3') ? 0.9 : 0))
-            });
-        });
-        
-        // Анимация заголовка
-        document.addEventListener('DOMContentLoaded', () => {
-            gsap.to('.names', { opacity: 1, duration: 1.5, ease: "power2.out" });
-            gsap.to('.date', { opacity: 1, duration: 1.5, delay: 0.3, ease: "power2.out" });
-        });
-        
-        // Плавный скролл
-        document.querySelector('.scroll-down').addEventListener('click', () => {
-            window.scrollBy({
-                top: window.innerHeight,
-                behavior: 'smooth'
-            });
-        });
-
-        // Обработка формы
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('weddingForm');
-            const guestsSelect = document.getElementById('guests');
-            const customGuestsInput = document.getElementById('custom-guests');
-            const guestNamesContainer = document.getElementById('guest-names-container');
-            const submitBtn = document.getElementById('submitBtn');
-            const btnText = submitBtn.querySelector('.btn-text');
-            const loader = submitBtn.querySelector('.loader');
-            const successModal = document.getElementById('successModal');
+        document.getElementById('weddingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            // Инициализация данных из localStorage
-            loadFormData();
+            // Собираем данные
+            const formData = {
+                "entry.669745214": document.getElementById('name').value,
+                "entry.802437466": document.getElementById('contact').value,
+                "entry.368353789": document.getElementById('guests').value,
+                "entry.640409853": document.querySelector('input[name="attendance"]:checked').value,
+                "entry.656168066": document.getElementById('comments').value
+            };
             
-            // Обработчик изменения количества гостей
-            guestsSelect.addEventListener('change', function() {
-                if (this.value === 'custom') {
-                    customGuestsInput.classList.remove('hidden');
-                    customGuestsInput.focus();
-                } else {
-                    customGuestsInput.classList.add('hidden');
-                    updateGuestNamesFields(this.value);
-                }
-            });
+            // Отправка через iframe (самый надежный способ)
+            const iframe = document.createElement('iframe');
+            iframe.name = 'hidden-iframe';
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
             
-            // Обработчик ручного ввода количества гостей
-            customGuestsInput.addEventListener('input', function() {
-                updateGuestNamesFields(this.value);
-            });
+            const form = document.createElement('form');
+            form.action = 'https://docs.google.com/forms/d/e/1FAIpQLSeU-CaAd2hFfgVcJvA7FUOcED2aeZXGElgWCbyLVKKhF-Ng5Q/formResponse';
+            form.method = 'POST';
+            form.target = 'hidden-iframe';
             
-            // Валидация в реальном времени
-            form.addEventListener('input', function(e) {
-                validateField(e.target);
-                updateProgressBar();
-                saveFormData();
-            });
-            
-            // Обработчик отправки формы
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                if (!validateForm()) return;
-                
-                // Показать лоадер
-                btnText.textContent = 'Отправка...';
-                loader.classList.remove('hidden');
-                submitBtn.disabled = true;
-                
-                // Подготовка данных для отправки
-                const formData = {
-                    "entry.669745214": form.name.value, // Ваше имя
-                    "entry.802437466": form.contact.value, // Email или телефон
-                    "entry.368353789": guestsSelect.value === 'custom' ? customGuestsInput.value : guestsSelect.value, // Количество гостей
-                    "entry.640409853": document.querySelector('input[name="attendance"]:checked').value, // Присутствие
-                    "entry.656168066": form.comments.value // Комментарии
-                };
-
-                // Собираем имена гостей, если есть
-                const guestInputs = document.querySelectorAll('.guest-name-field input');
-                guestInputs.forEach((input, index) => {
-                    formData[`entry.1065046570.${index + 2}`] = input.value;
-                });
-
-                // Отправка данных через Google Forms
-                const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeU-CaAd2hFfgVcJvA7FUOcED2aeZXGElgWCbyLVKKhF-Ng5Q/formResponse';;
-                
-                // Создаем скрытый iframe для отправки
-                const iframe = document.createElement('iframe');
-                iframe.name = 'hidden-iframe';
-                iframe.style.display = 'none';
-                document.body.appendChild(iframe);
-                
-                // Создаем форму для отправки
-                const submitForm = document.createElement('form');
-                submitForm.action = formUrl;
-                submitForm.method = 'POST';
-                submitForm.target = 'hidden-iframe';
-                
-                // Добавляем поля в форму
-                for (const key in formData) {
-                    if (formData[key]) {
-                        const input = document.createElement('input');
-                        input.type = 'hidden';
-                        input.name = key;
-                        input.value = formData[key];
-                        submitForm.appendChild(input);
-                    }
-                }
-                
-                // Добавляем форму на страницу и отправляем
-                document.body.appendChild(submitForm);
-                submitForm.submit();
-                
-                // Показываем успешное сообщение
-                setTimeout(() => {
-                    showSuccess();
-                    btnText.textContent = 'Отправить';
-                    loader.classList.add('hidden');
-                    submitBtn.disabled = false;
-                    
-                    // Удаляем временные элементы
-                    document.body.removeChild(submitForm);
-                    document.body.removeChild(iframe);
-                }, 1000);
-            });
-            
-            // Закрытие модального окна
-            successModal.querySelector('.close-modal').addEventListener('click', closeModal);
-            successModal.querySelector('.modal-close-btn').addEventListener('click', closeModal);
-            
-            function closeModal() {
-                successModal.classList.remove('show');
-                document.body.style.overflow = '';
-                form.reset();
-                localStorage.removeItem('weddingFormData');
-                document.querySelector('.social-share').classList.remove('hidden');
-            }
-            
-            function showSuccess() {
-                successModal.classList.add('show');
-                document.body.style.overflow = 'hidden';
-                localStorage.removeItem('weddingFormData');
-                document.querySelector('.social-share').classList.remove('hidden');
-            }
-            
-            // Функции
-            function updateGuestNamesFields(guestCount) {
-                guestNamesContainer.innerHTML = '';
-                
-                const count = guestCount === 'custom' ? parseInt(customGuestsInput.value) || 1 : parseInt(guestCount) || 1;
-                
-                if (count > 1) {
-                    guestNamesContainer.classList.remove('hidden');
-                    
-                    for (let i = 2; i <= count; i++) {
-                        const div = document.createElement('div');
-                        div.className = 'form-group guest-name-field';
-                        div.innerHTML = `
-                            <label for="guest-${i}">
-                                <i class="fas fa-user icon"></i> Имя гостя #${i}
-                            </label>
-                            <input type="text" id="guest-${i}" name="guest-${i}">
-                        `;
-                        guestNamesContainer.appendChild(div);
-                    }
-                } else {
-                    guestNamesContainer.classList.add('hidden');
+            // Добавляем поля
+            for (const key in formData) {
+                if (formData[key]) {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = key;
+                    input.value = formData[key];
+                    form.appendChild(input);
                 }
             }
             
-            function validateField(field) {
-                const group = field.closest('.form-group');
-                if (!group) return true;
-                
-                const errorElement = group.querySelector('.error-message');
-                
-                if (!field.required && field.id !== 'custom-guests') return true;
-                
-                let isValid = true;
-                let errorMessage = '';
-                
-                if (field.value.trim() === '' && field.required) {
-                    isValid = false;
-                    errorMessage = 'Это поле обязательно для заполнения';
-                } else if (field.id === 'contact') {
-                    if (!validateEmail(field.value) && !validatePhone(field.value)) {
-                        isValid = false;
-                        errorMessage = 'Введите корректный email или телефон';
-                    }
-                } else if (field.id === 'custom-guests' && field.value.trim() !== '') {
-                    const val = parseInt(field.value);
-                    if (isNaN(val) || val < 1 || val > 10) {
-                        isValid = false;
-                        errorMessage = 'Введите число от 1 до 10';
-                    }
-                }
-                
-                if (isValid) {
-                    group.classList.remove('error');
-                    if (errorElement) errorElement.textContent = '';
-                } else {
-                    group.classList.add('error');
-                    if (errorElement) errorElement.textContent = errorMessage;
-                }
-                
-                return isValid;
-            }
+            document.body.appendChild(form);
+            form.submit();
             
-            function validateForm() {
-                let isValid = true;
-                const requiredFields = form.querySelectorAll('[required]');
-                
-                requiredFields.forEach(field => {
-                    if (!validateField(field)) {
-                        isValid = false;
-                        // Прокрутка к первому ошибочному полю
-                        if (isValid === false && field.offsetParent) {
-                            field.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            field.focus();
-                            isValid = true; // Чтобы сработало только для первого поля
-                        }
-                    }
-                });
-                
-                // Проверка кастомного количества гостей
-                if (guestsSelect.value === 'custom' && !validateField(customGuestsInput)) {
-                    isValid = false;
-                }
-                
-                return isValid;
-            }
+            // Показать сообщение об успехе
+            alert('Ваш ответ успешно отправлен!');
             
-            function validateEmail(email) {
-                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return re.test(email);
-            }
-            
-            function validatePhone(phone) {
-                const re = /^[\d\+][\d\s\-\(\)]{7,}\d$/;
-                return re.test(phone);
-            }
-            
-            function saveFormData() {
-                const formData = {
-                    name: form.name.value,
-                    contact: form.contact.value,
-                    guests: form.guests.value,
-                    customGuests: customGuestsInput.value,
-                    attendance: document.querySelector('input[name="attendance"]:checked')?.value || 'Да, с радостью!',
-                    comments: form.comments.value,
-                    guestNames: []
-                };
-                
-                // Сохраняем имена гостей
-                document.querySelectorAll('.guest-name-field input').forEach(input => {
-                    formData.guestNames.push(input.value);
-                });
-                
-                localStorage.setItem('weddingFormData', JSON.stringify(formData));
-            }
-            
-           function loadFormData() {
-    const savedData = localStorage.getItem('weddingFormData');
-    if (!savedData) return;
-    
-    try {
-        const formData = JSON.parse(savedData);
-        
-        // Заполняем основные поля
-        if (formData.name) form.name.value = formData.name;
-        if (formData.contact) form.contact.value = formData.contact;
-        if (formData.guests) form.guests.value = formData.guests;
-        if (formData.customGuests) customGuestsInput.value = formData.customGuests;
-        if (formData.comments) form.comments.value = formData.comments;
-        
-        // Обработка кастомного количества гостей
-        if (formData.guests === 'custom') {
-            customGuestsInput.classList.remove('hidden');
-        }
-        
-        // Безопасная установка радио-кнопки
-        if (formData.attendance) {
-            const radioButton = document.querySelector(`input[name="attendance"][value="${formData.attendance}"]`);
-            if (radioButton) {
-                radioButton.checked = true;
-            }
-        }
-        
-        // Обновляем поля имен гостей если нужно
-        if (formData.guests && formData.guests !== 'custom') {
-            updateGuestNamesFields(formData.guests);
-        } else if (formData.customGuests) {
-            updateGuestNamesFields('custom');
-        }
-        
-        // Заполняем имена гостей
-        if (formData.guestNames && formData.guestNames.length > 0) {
+            // Очистка
             setTimeout(() => {
-                document.querySelectorAll('.guest-name-field input').forEach((input, index) => {
-                    if (formData.guestNames[index]) {
-                        input.value = formData.guestNames[index];
-                    }
-                });
-            }, 100);
-        }
-    } catch (e) {
-        console.error('Ошибка загрузки данных из localStorage:', e);
-        localStorage.removeItem('weddingFormData');
-    }
-}
-            
-            function updateProgressBar() {
-                const requiredFields = form.querySelectorAll('[required]');
-                let filledCount = 0;
-                
-                requiredFields.forEach(field => {
-                    if (field.value.trim() !== '') {
-                        filledCount++;
-                    }
-                });
-                
-                // Проверяем кастомное количество гостей
-                if (guestsSelect.value === 'custom' && customGuestsInput.value.trim() !== '') {
-                    filledCount++;
-                }
-                
-                const progress = (filledCount / (requiredFields.length + (guestsSelect.value === 'custom' ? 1 : 0))) * 100;
-                const progressBar = document.querySelector('.progress');
-                
-                if (progressBar) {
-                    progressBar.style.width = `${progress}%`;
-                }
-            }
+                document.body.removeChild(form);
+                document.body.removeChild(iframe);
+            }, 3000);
         });
     </script>
 </body>
