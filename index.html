@@ -1346,45 +1346,55 @@
                 localStorage.setItem('weddingFormData', JSON.stringify(formData));
             }
             
-            function loadFormData() {
-                const savedData = localStorage.getItem('weddingFormData');
-                if (!savedData) return;
-                
-                const formData = JSON.parse(savedData);
-                
-                form.name.value = formData.name || '';
-                form.contact.value = formData.contact || '';
-                form.guests.value = formData.guests || '';
-                customGuestsInput.value = formData.customGuests || '';
-                
-                if (formData.guests === 'custom') {
-                    customGuestsInput.classList.remove('hidden');
-                }
-                
-                if (formData.attendance) {
-                    document.querySelector(`input[name="attendance"][value="${formData.attendance}"]`).checked = true;
-                }
-                
-                form.comments.value = formData.comments || '';
-                
-                // Обновляем поля имен гостей если нужно
-                if (formData.guests && formData.guests !== 'custom') {
-                    updateGuestNamesFields(formData.guests);
-                } else if (formData.customGuests) {
-                    updateGuestNamesFields('custom');
-                }
-                
-                // Заполняем имена гостей
-                if (formData.guestNames && formData.guestNames.length > 0) {
-                    setTimeout(() => {
-                        document.querySelectorAll('.guest-name-field input').forEach((input, index) => {
-                            if (formData.guestNames[index]) {
-                                input.value = formData.guestNames[index];
-                            }
-                        });
-                    }, 100);
-                }
+           function loadFormData() {
+    const savedData = localStorage.getItem('weddingFormData');
+    if (!savedData) return;
+    
+    try {
+        const formData = JSON.parse(savedData);
+        
+        // Заполняем основные поля
+        if (formData.name) form.name.value = formData.name;
+        if (formData.contact) form.contact.value = formData.contact;
+        if (formData.guests) form.guests.value = formData.guests;
+        if (formData.customGuests) customGuestsInput.value = formData.customGuests;
+        if (formData.comments) form.comments.value = formData.comments;
+        
+        // Обработка кастомного количества гостей
+        if (formData.guests === 'custom') {
+            customGuestsInput.classList.remove('hidden');
+        }
+        
+        // Безопасная установка радио-кнопки
+        if (formData.attendance) {
+            const radioButton = document.querySelector(`input[name="attendance"][value="${formData.attendance}"]`);
+            if (radioButton) {
+                radioButton.checked = true;
             }
+        }
+        
+        // Обновляем поля имен гостей если нужно
+        if (formData.guests && formData.guests !== 'custom') {
+            updateGuestNamesFields(formData.guests);
+        } else if (formData.customGuests) {
+            updateGuestNamesFields('custom');
+        }
+        
+        // Заполняем имена гостей
+        if (formData.guestNames && formData.guestNames.length > 0) {
+            setTimeout(() => {
+                document.querySelectorAll('.guest-name-field input').forEach((input, index) => {
+                    if (formData.guestNames[index]) {
+                        input.value = formData.guestNames[index];
+                    }
+                });
+            }, 100);
+        }
+    } catch (e) {
+        console.error('Ошибка загрузки данных из localStorage:', e);
+        localStorage.removeItem('weddingFormData');
+    }
+}
             
             function updateProgressBar() {
                 const requiredFields = form.querySelectorAll('[required]');
